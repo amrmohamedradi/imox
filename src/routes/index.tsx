@@ -406,7 +406,9 @@ function Index() {
             </Button>
           </div>
           <Button
-            aria-label="Open menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
             variant="ghost"
             size="icon"
             className="md:hidden"
@@ -416,7 +418,7 @@ function Index() {
           </Button>
         </div>
         {menuOpen && (
-          <nav className="border-t border-border bg-background px-5 py-5 md:hidden">
+          <nav id="mobile-nav" className="border-t border-border bg-background px-5 py-5 md:hidden">
             {nav.map((item) => (
               <a
                 key={item.href}
@@ -556,7 +558,7 @@ function Index() {
       <section id="for-whom" className="py-20 md:py-28">
         <div className="mx-auto grid max-w-7xl gap-x-4 gap-y-10 px-5 sm:grid-cols-2 lg:grid-cols-12 lg:px-8">
           <div className="reveal sm:col-span-2 lg:col-span-5 xl:col-span-4">
-            <p className="mb-4 text-xs font-bold uppercase text-primary">
+            <p className="mb-4 text-xs font-bold uppercase text-brand-deep">
               Built for real life and real work
             </p>
             <h2 className="max-w-md text-4xl font-bold leading-[1.04] md:text-6xl">
@@ -633,7 +635,7 @@ function Index() {
       <section className="overflow-hidden bg-secondary py-24 md:py-32">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[.82fr_1.18fr] lg:px-8">
           <div>
-            <p className="mb-4 text-xs font-bold uppercase text-primary">The aha moment</p>
+            <p className="mb-4 text-xs font-bold uppercase text-brand-deep">The aha moment</p>
             <h2 className="text-4xl font-bold md:text-6xl">
               Just say it.
               <br />
@@ -725,7 +727,7 @@ function Index() {
       <section id="how" className="py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="reveal text-center">
-            <p className="mb-4 text-xs font-bold uppercase text-primary">How it works</p>
+            <p className="mb-4 text-xs font-bold uppercase text-brand-deep">How it works</p>
             <h2 className="mx-auto max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
               Communication That Automatically Becomes Execution
             </h2>
@@ -838,7 +840,7 @@ function Index() {
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="grid gap-14 lg:grid-cols-[.8fr_1.2fr]">
             <div>
-              <p className="mb-4 text-xs font-bold uppercase text-primary">Why iMOX is different</p>
+              <p className="mb-4 text-xs font-bold uppercase text-brand-deep">Why iMOX is different</p>
               <h2 className="text-4xl font-bold md:text-6xl">
                 Most tools help manage work.{" "}
                 <span className="text-brand-gradient">iMOX makes work move.</span>
@@ -962,7 +964,7 @@ function Index() {
             </div>
 
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-primary-foreground/40">
+              <p className="text-xs font-bold uppercase tracking-wider text-primary-foreground/55">
                 Product
               </p>
               <ul className="mt-5 space-y-3.5 text-sm text-primary-foreground/70">
@@ -982,7 +984,7 @@ function Index() {
             </div>
 
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-primary-foreground/40">
+              <p className="text-xs font-bold uppercase tracking-wider text-primary-foreground/55">
                 Legal
               </p>
               <ul className="mt-5 space-y-3.5 text-sm text-primary-foreground/70">
