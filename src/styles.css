@@ -70,6 +70,8 @@
 
 :root {
   --radius: 0.75rem;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --background: oklch(0.995 0.002 285);
   --foreground: oklch(0.2 0.04 285);
   --card: oklch(1 0 0);
@@ -157,8 +159,35 @@
     overflow-x: hidden;
   }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scrollbar-color: color-mix(in oklab, var(--primary) 45%, var(--border)) transparent;
+    scrollbar-width: thin;
+  }
   button, a { letter-spacing: 0; }
+
+  /* Themed browser surfaces so parts we do not draw still carry the brand. */
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 26%, transparent);
+    color: var(--brand-ink);
+  }
+
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--primary) 38%, var(--border));
+    border: 3px solid var(--background);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklab, var(--primary) 62%, var(--border));
+  }
+
+  :focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--primary) 72%, transparent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
 }
 
 @utility imox-grid {
@@ -176,11 +205,18 @@
   background: radial-gradient(circle at 22% 28%, color-mix(in oklab, var(--brand-lime) 25%, transparent), transparent 25%), radial-gradient(circle at 78% 35%, color-mix(in oklab, var(--brand-cyan) 26%, transparent), transparent 30%), radial-gradient(circle at 55% 82%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 34%);
 }
 
+/* Animatable angle for the aurora beam so it can drift smoothly. */
+@property --aurora-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 205deg;
+}
+
 /* Rainbow aurora beam radiating from the top center, fading into deep ink toward the edges. */
 @utility cta-aurora {
   background:
     radial-gradient(130% 92% at 50% 2%, transparent 8%, color-mix(in oklab, var(--brand-ink) 62%, transparent) 52%, var(--brand-ink) 86%),
-    conic-gradient(from 205deg at 50% 0%,
+    conic-gradient(from var(--aurora-angle) at 50% 0%,
       color-mix(in oklab, var(--brand-lime) 82%, white) 0deg,
       var(--brand-cyan) 52deg,
       var(--primary) 118deg,
@@ -199,8 +235,35 @@
   }
 
   .hero-reveal {
-    animation: hero-reveal 600ms cubic-bezier(.22, 1, .36, 1) both;
+    animation: hero-reveal 720ms var(--ease-out-expo) both;
     animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* Entrance for the How-it-works media each time the active step swaps it. */
+  .step-media {
+    animation: step-media 520ms var(--ease-out-expo) both;
+  }
+
+  /* Animated underline for primary navigation links. */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.35rem;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--brand-cyan));
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 320ms var(--ease-out-expo);
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    transform: scaleX(1);
   }
 
   .hero-card {
@@ -231,15 +294,37 @@
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .reveal {
-      animation: hero-reveal linear both;
+      animation: reveal-rise linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 45%;
+      animation-range: entry 2% entry 42%;
     }
   }
 }
 
+/* Slow, subtle drift keeps the CTA aurora feeling alive without demanding attention. */
+@media (prefers-reduced-motion: no-preference) {
+  .cta-aurora {
+    animation: aurora-drift 22s ease-in-out infinite;
+  }
+}
+
 @keyframes float-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-@keyframes hero-reveal { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hero-reveal {
+  from { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes reveal-rise {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes step-media {
+  from { opacity: 0; transform: scale(1.03); filter: blur(12px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+@keyframes aurora-drift {
+  0%, 100% { --aurora-angle: 198deg; }
+  50% { --aurora-angle: 214deg; }
+}
 
 @media (hover: hover) and (pointer: fine) {
   .hero-card:hover {
@@ -271,8 +356,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .float-slow, .float-delay, .hero-reveal { animation: none; }
-  .hero-reveal { opacity: 1; transform: none; }
+  .float-slow, .float-delay, .hero-reveal, .step-media, .cta-aurora { animation: none; }
+  .hero-reveal, .step-media { opacity: 1; transform: none; filter: none; }
+  .nav-link::after { transition: none; }
   .hero-card, .hero-card:hover, .hero-card img { transition: none; transform: none !important; }
   .audience-card, .audience-card:hover, #for-whom img { transition: none; transform: none !important; }
 }

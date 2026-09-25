@@ -20,6 +20,9 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Impeccable platform engine binaries (large, platform-specific; re-downloaded on demand)
+.claude/skills/impeccable/scripts/bin/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

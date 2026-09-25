@@ -389,7 +389,7 @@ function Index() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                className="nav-link text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
               >
                 {item.label}
               </a>
@@ -724,7 +724,7 @@ function Index() {
 
       <section id="how" className="py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="text-center">
+          <div className="reveal text-center">
             <p className="mb-4 text-xs font-bold uppercase text-primary">How it works</p>
             <h2 className="mx-auto max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
               Communication That Automatically Becomes Execution
@@ -740,7 +740,7 @@ function Index() {
                 loading="lazy"
                 width={1512}
                 height={2017}
-                className="h-full w-full object-cover"
+                className="step-media h-full w-full object-cover"
               />
             </figure>
 
