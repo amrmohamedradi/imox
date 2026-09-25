@@ -153,6 +153,14 @@
 
   body {
     background-color: var(--color-background);
+    /* Brand atmosphere spread across the whole site as a soft, viewport-fixed
+       wash; the hero keeps its grid on top of it. */
+    background-image:
+      radial-gradient(38% 34% at 16% 10%, color-mix(in oklab, var(--brand-lime) 16%, transparent), transparent 72%),
+      radial-gradient(42% 36% at 85% 15%, color-mix(in oklab, var(--brand-cyan) 16%, transparent), transparent 72%),
+      radial-gradient(55% 45% at 50% 96%, color-mix(in oklab, var(--primary) 12%, transparent), transparent 74%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     letter-spacing: 0;
@@ -288,6 +296,40 @@
       linear-gradient(var(--background), var(--background)) padding-box,
       linear-gradient(100deg, var(--primary), var(--brand-cyan), var(--brand-lime)) border-box;
   }
+
+  /* Phone chat: bubbles arrive one after another so the thread appears to write
+     itself, then the AI task card lands with a single soft ring pulse. */
+  .chat-thread > * {
+    animation: chat-pop 600ms var(--ease-out-quint) both;
+  }
+  .chat-thread > *:nth-child(1) { animation-delay: 640ms; }
+  .chat-thread > *:nth-child(2) { animation-delay: 1120ms; }
+  .chat-thread > *:nth-child(4) { animation-delay: 2160ms; }
+  .chat-task {
+    animation:
+      chat-pop 600ms var(--ease-out-quint) 1620ms both,
+      chat-task-ring 1500ms ease-out 2160ms 1;
+  }
+
+  /* A light sweep crosses a primary button on hover. */
+  .btn-sheen { position: relative; overflow: hidden; }
+  .btn-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 32%,
+      color-mix(in oklab, white 42%, transparent) 50%,
+      transparent 68%
+    );
+    transform: translateX(-130%);
+    transition: transform 720ms var(--ease-out-expo);
+    pointer-events: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-sheen:hover::after { transform: translateX(130%); }
+  }
 }
 
 /* Scroll-driven entrance where supported; elsewhere content is simply visible. */
@@ -325,6 +367,15 @@
   0%, 100% { --aurora-angle: 198deg; }
   50% { --aurora-angle: 214deg; }
 }
+@keyframes chat-pop {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes chat-task-ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 45%, transparent); }
+  70% { box-shadow: 0 0 0 9px color-mix(in oklab, var(--primary) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
 
 @media (hover: hover) and (pointer: fine) {
   .hero-card:hover {
@@ -358,6 +409,7 @@
   html { scroll-behavior: auto; }
   .float-slow, .float-delay, .hero-reveal, .step-media, .cta-aurora { animation: none; }
   .hero-reveal, .step-media { opacity: 1; transform: none; filter: none; }
+  .chat-thread > *, .chat-task { animation: none; opacity: 1; transform: none; box-shadow: none; }
   .nav-link::after { transition: none; }
   .hero-card, .hero-card:hover, .hero-card img { transition: none; transform: none !important; }
   .audience-card, .audience-card:hover, #for-whom img { transition: none; transform: none !important; }

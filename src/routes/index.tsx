@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import {
   ArrowRight,
   BellRing,
@@ -216,14 +216,14 @@ function PhoneChat({ compact = false, className = "" }: { compact?: boolean; cla
             <p className="text-[9px] text-muted-foreground">8 members · iMOX Copilot on</p>
           </div>
         </div>
-        <div className="space-y-3 text-[10px] leading-relaxed">
+        <div className="chat-thread space-y-3 text-[10px] leading-relaxed">
           <div className="mr-8 rounded-xl rounded-tl-sm bg-background p-2.5 shadow-sm">
             Maya, can you confirm the florist tomorrow?
           </div>
           <div className="ml-9 rounded-xl rounded-tr-sm bg-primary p-2.5 text-primary-foreground">
             Yes — I’ll call before noon.
           </div>
-          <div className="rounded-xl border border-primary/20 bg-background p-3 shadow-sm">
+          <div className="chat-task rounded-xl border border-primary/20 bg-background p-3 shadow-sm">
             <div className="mb-2 flex items-center gap-1.5 font-bold text-primary">
               <WandSparkles className="size-3" /> Task created
             </div>
@@ -373,14 +373,26 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
   const [activeHowStep, setActiveHowStep] = useState(0);
+  const [howPaused, setHowPaused] = useState(false);
   const activeHowStepData = steps[activeHowStep] ?? steps[0];
+
+  // Cycle through the How-it-works steps every 2s; pause while the visitor
+  // hovers or focuses the block, then resume once they move away.
+  useEffect(() => {
+    if (howPaused) return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => {
+      setActiveHowStep((i) => (i + 1) % steps.length);
+    }, 2000);
+    return () => window.clearInterval(id);
+  }, [howPaused]);
   const nav = [
     { label: "Who it’s for", href: "#for-whom" },
     { label: "How it works", href: "#how" },
     { label: "Why iMOX", href: "#why" },
   ];
   return (
-    <main id="top" className="bg-background text-foreground">
+    <main id="top" className="text-foreground">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:px-8">
           <Logo />
@@ -399,9 +411,10 @@ function Index() {
             <a href="#download" className="text-sm font-medium text-brand-ink">
               Open iMOX Web
             </a>
-            <Button asChild variant="brand" size="lg">
+            <Button asChild variant="brand" size="lg" className="group btn-sheen">
               <a href="#download">
-                Get the app <ArrowRight />
+                Get the app{" "}
+                <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </Button>
           </div>
@@ -437,7 +450,6 @@ function Index() {
       </header>
 
       <section className="relative overflow-hidden px-5 pt-24 pb-16 lg:px-8 lg:pt-28 xl:min-h-[min(100svh,860px)]">
-        <div className="absolute inset-0 hero-atmosphere" />
         <div className="absolute inset-0 imox-grid hero-grid-mask opacity-80" />
         <div className="relative mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-12 lg:gap-8 xl:gap-10">
           <div className="max-w-2xl lg:col-span-5 lg:flex lg:min-h-[624px] lg:flex-col lg:justify-between lg:py-1">
@@ -449,7 +461,7 @@ function Index() {
                 <Sparkle className="size-3.5" /> MEET iMOX COPILOT
               </div>
               <h1
-                className="hero-reveal max-w-[12ch] text-[2.6rem] font-bold leading-[1.04] sm:text-5xl lg:text-6xl xl:text-7xl"
+                className="hero-reveal max-w-[12ch] text-[2.05rem] font-bold leading-[1.06] sm:text-5xl sm:leading-[1.04] lg:text-6xl xl:text-7xl"
                 style={{ "--reveal-delay": "80ms" } as CSSProperties}
               >
                 Your group chat
@@ -457,7 +469,7 @@ function Index() {
                 finally <span className="text-brand-gradient">remembers.</span>
               </h1>
               <p
-                className="hero-reveal mt-6 max-w-xl text-base leading-7 text-muted-foreground md:text-lg"
+                className="hero-reveal mt-5 max-w-xl text-[0.95rem] leading-6 text-muted-foreground sm:text-base sm:leading-7 md:text-lg"
                 style={{ "--reveal-delay": "160ms" } as CSSProperties}
               >
                 Just chat. iMOX handles the rest—turning conversations into tasks, ownership,
@@ -469,9 +481,10 @@ function Index() {
                 className="hero-reveal flex flex-col gap-3 sm:flex-row"
                 style={{ "--reveal-delay": "240ms" } as CSSProperties}
               >
-                <Button asChild variant="brand" size="xl" className="active:scale-[.98]">
+                <Button asChild variant="brand" size="xl" className="group btn-sheen active:scale-[.98]">
                   <a href="#download">
-                    Start free <ArrowRight />
+                    Start free{" "}
+                    <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
                   </a>
                 </Button>
                 <Button
@@ -517,10 +530,10 @@ function Index() {
               style={{ "--reveal-delay": "440ms" } as CSSProperties}
             >
               <div className="absolute inset-0 bg-background/45" />
-              <div className="relative flex min-h-[390px] items-center justify-center lg:min-h-full">
+              <div className="relative flex min-h-[300px] items-center justify-center sm:min-h-[360px] lg:min-h-full">
                 <PhoneChat
                   compact
-                  className="scale-[.82] sm:scale-[.86] lg:scale-[.78] xl:scale-[.85]"
+                  className="scale-[.74] sm:scale-[.86] lg:scale-[.78] xl:scale-[.85]"
                 />
                 <div className="float-slow absolute right-2 top-8 hidden rounded-2xl border border-border bg-background/92 p-3 text-left shadow-xl backdrop-blur md:block">
                   <p className="text-xs font-bold">Deadline tracked</p>
@@ -555,16 +568,16 @@ function Index() {
         </div>
       </section>
 
-      <section id="for-whom" className="py-20 md:py-28">
+      <section id="for-whom" className="py-14 md:py-28">
         <div className="mx-auto grid max-w-7xl gap-x-4 gap-y-10 px-5 sm:grid-cols-2 lg:grid-cols-12 lg:px-8">
           <div className="reveal sm:col-span-2 lg:col-span-5 xl:col-span-4">
             <p className="mb-4 text-xs font-bold uppercase text-brand-deep">
               Built for real life and real work
             </p>
-            <h2 className="max-w-md text-4xl font-bold leading-[1.04] md:text-6xl">
+            <h2 className="max-w-md text-3xl font-bold leading-[1.04] md:text-6xl">
               Who is iMOX for?
             </h2>
-            <p className="mt-7 text-lg font-semibold leading-7">
+            <p className="mt-6 text-base font-semibold leading-6 sm:mt-7 sm:text-lg sm:leading-7">
               Work happens in chat. But nothing gets tracked.
             </p>
             <ul className="mt-6 grid max-w-md gap-2" aria-label="What goes wrong today">
@@ -632,16 +645,16 @@ function Index() {
         </div>
       </section>
 
-      <section className="overflow-hidden bg-secondary py-24 md:py-32">
+      <section className="overflow-hidden bg-secondary py-16 md:py-32">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[.82fr_1.18fr] lg:px-8">
-          <div>
+          <div className="reveal">
             <p className="mb-4 text-xs font-bold uppercase text-brand-deep">The aha moment</p>
-            <h2 className="text-4xl font-bold md:text-6xl">
+            <h2 className="text-3xl font-bold md:text-6xl">
               Just say it.
               <br />
               <span className="text-brand-gradient">iMOX handles the execution.</span>
             </h2>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
+            <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground sm:mt-6 sm:text-lg sm:leading-8">
               You communicate naturally. iMOX Copilot listens to the conversation and transforms it
               into structured action automatically.
             </p>
@@ -663,13 +676,14 @@ function Index() {
             <p className="mt-8 text-sm font-semibold">
               No forms. No project setup. No manual task creation.
             </p>
-            <Button asChild variant="brand" size="xl" className="mt-7">
+            <Button asChild variant="brand" size="xl" className="group btn-sheen mt-7">
               <a href="#download">
-                Try iMOX Copilot <ArrowRight />
+                Try iMOX Copilot{" "}
+                <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </Button>
           </div>
-          <div className="relative">
+          <div className="reveal relative">
             <figure className="relative overflow-visible">
               <img
                 src={s3WebBanner}
@@ -724,16 +738,22 @@ function Index() {
         </div>
       </section>
 
-      <section id="how" className="py-24 md:py-32">
+      <section id="how" className="py-16 md:py-32">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="reveal text-center">
             <p className="mb-4 text-xs font-bold uppercase text-brand-deep">How it works</p>
-            <h2 className="mx-auto max-w-3xl text-4xl font-bold leading-tight md:text-6xl">
+            <h2 className="mx-auto max-w-3xl text-3xl font-bold leading-tight md:text-6xl">
               Communication That Automatically Becomes Execution
             </h2>
           </div>
 
-          <div className="mt-14 grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] xl:gap-10">
+          <div
+            className="mt-14 grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] xl:gap-10"
+            onMouseEnter={() => setHowPaused(true)}
+            onMouseLeave={() => setHowPaused(false)}
+            onFocusCapture={() => setHowPaused(true)}
+            onBlurCapture={() => setHowPaused(false)}
+          >
             <figure className="relative mx-auto aspect-[1512/2017] w-full max-w-[460px] overflow-hidden rounded-[2rem]">
               <img
                 key={activeHowStepData.title}
@@ -783,18 +803,19 @@ function Index() {
           </div>
 
           <div className="mt-9 text-center">
-            <Button asChild variant="brand" size="xl">
+            <Button asChild variant="brand" size="xl" className="group btn-sheen">
               <a href="#download">
-                Start Using iMOX Copilot <ArrowRight />
+                Start Using iMOX Copilot{" "}
+                <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="bg-brand-ink py-24 text-primary-foreground md:py-32">
+      <section className="bg-brand-ink py-16 text-primary-foreground md:py-32">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2 lg:px-8">
-          <figure className="relative min-h-[520px] overflow-hidden rounded-2xl border border-primary-foreground/10">
+          <figure className="reveal relative min-h-[340px] overflow-hidden rounded-2xl border border-primary-foreground/10 sm:min-h-[440px] lg:min-h-[520px]">
             <img
               src={organizedLife}
               alt="Friends using iMOX to organize work, travel, and an upcoming wedding"
@@ -808,12 +829,12 @@ function Index() {
               Planning stays in the conversation—not in another complicated tool.
             </figcaption>
           </figure>
-          <div>
+          <div className="reveal">
             <p className="mb-4 text-xs font-bold uppercase text-brand-lime">
               Built for how people actually work
             </p>
-            <h2 className="text-4xl font-bold md:text-6xl">Not another project management tool.</h2>
-            <p className="mt-6 text-lg leading-8 text-primary-foreground/70">
+            <h2 className="text-3xl font-bold md:text-6xl">Not another project management tool.</h2>
+            <p className="mt-5 text-base leading-7 text-primary-foreground/70 sm:mt-6 sm:text-lg sm:leading-8">
               Most platforms ask teams to stop working and start managing software. iMOX does the
               opposite. It fits directly into the way people already communicate.
             </p>
@@ -836,12 +857,12 @@ function Index() {
         </div>
       </section>
 
-      <section id="why" className="py-24 md:py-32">
+      <section id="why" className="py-16 md:py-32">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="grid gap-14 lg:grid-cols-[.8fr_1.2fr]">
-            <div>
+            <div className="reveal">
               <p className="mb-4 text-xs font-bold uppercase text-brand-deep">Why iMOX is different</p>
-              <h2 className="text-4xl font-bold md:text-6xl">
+              <h2 className="text-3xl font-bold md:text-6xl">
                 Most tools help manage work.{" "}
                 <span className="text-brand-gradient">iMOX makes work move.</span>
               </h2>
@@ -889,7 +910,7 @@ function Index() {
               ].map(({ icon: Icon, title, text }) => (
                 <div
                   key={title}
-                  className="audience-card audience-gradient-card group flex flex-col gap-4 overflow-hidden rounded-2xl border-2 border-transparent p-6"
+                  className="reveal audience-card audience-gradient-card group flex flex-col gap-4 overflow-hidden rounded-2xl border-2 border-transparent p-6"
                 >
                   <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-soft text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
                     <Icon className="size-5" />
@@ -904,7 +925,7 @@ function Index() {
                   </div>
                 </div>
               ))}
-              <div className="audience-card audience-gradient-card group flex items-center gap-4 overflow-hidden rounded-2xl border-2 border-transparent p-6 sm:col-span-2">
+              <div className="reveal audience-card audience-gradient-card group flex items-center gap-4 overflow-hidden rounded-2xl border-2 border-transparent p-6 sm:col-span-2">
                 <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-soft text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
                   <Zap className="size-5" />
                 </span>
@@ -923,9 +944,9 @@ function Index() {
       </section>
 
       <section id="download" className="px-5 pb-10 pt-4">
-        <div className="cta-aurora relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] px-6 py-20 text-center text-primary-foreground md:px-16 md:py-24">
+        <div className="cta-aurora relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] px-6 py-16 text-center text-primary-foreground md:px-16 md:py-24">
           <AppIcon className="mx-auto size-16" />
-          <h2 className="mx-auto mt-8 max-w-4xl text-4xl font-bold md:text-6xl">
+          <h2 className="mx-auto mt-8 max-w-4xl text-3xl font-bold md:text-6xl">
             Get your whole team on iMOX.
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-primary-foreground/80">
