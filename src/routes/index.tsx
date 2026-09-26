@@ -934,7 +934,7 @@ function Index() {
                   </div>
                 </div>
               ))}
-              <div className="reveal audience-card audience-gradient-card group flex items-start gap-3 overflow-hidden rounded-2xl border-2 border-transparent p-4 sm:gap-4 sm:p-5 lg:p-6">
+              <div className="reveal audience-card audience-gradient-card group flex items-start gap-3 overflow-hidden rounded-2xl border-2 border-transparent p-4 sm:gap-4 sm:p-5 lg:col-span-2 lg:items-center lg:p-6">
                 <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-soft text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground sm:size-10 lg:size-11">
                   <Zap className="size-4 sm:size-5" />
                 </span>
