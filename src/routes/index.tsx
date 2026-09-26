@@ -468,12 +468,6 @@ function Index() {
         <div className="relative mx-auto grid max-w-7xl items-start gap-12 lg:grid-cols-12 lg:gap-8 xl:gap-10">
           <div className="max-w-2xl lg:col-span-5 lg:flex lg:min-h-[624px] lg:flex-col lg:justify-between lg:py-1">
             <div>
-              <div
-                className="hero-reveal mb-5 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/70 px-4 py-2 text-xs font-semibold text-primary shadow-sm backdrop-blur"
-                style={{ "--reveal-delay": "0ms" } as CSSProperties}
-              >
-                <Sparkle className="size-3.5" /> MEET iMOX COPILOT
-              </div>
               <h1
                 className="hero-reveal max-w-[12ch] text-[2.05rem] font-bold leading-[1.06] sm:text-5xl sm:leading-[1.04] lg:text-6xl xl:text-7xl"
                 style={{ "--reveal-delay": "80ms" } as CSSProperties}
