@@ -18,15 +18,16 @@ import {
   Sparkle,
   UserCheck,
   Users,
-  WandSparkles,
   X,
   Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroPeople from "@/assets/imox-people-hero.jpg";
 import copilotTeam from "@/assets/imox-copilot-team.jpg";
 import organizedLife from "@/assets/imox-life-organized.jpg";
 import copilotBuilding from "@/assets/imox-copilot-building.webp";
+import heroTeam from "@/assets/imox-hero-team.jpg";
+import heroSolo from "@/assets/imox-hero-solo.jpg";
+import heroHome from "@/assets/imox-hero-home.jpg";
 import s3ActionIcon from "../../assets/s3/09.png";
 import s3FollowUp from "../../assets/s3/11.png";
 import s3TodoCard from "../../assets/s3/gfgfgf.png";
@@ -168,6 +169,8 @@ function StoreBadge({
   return (
     <a
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`inline-flex items-center gap-2.5 rounded-xl bg-white px-4 py-2.5 text-brand-ink shadow-lg ring-1 ring-black/5 transition-transform duration-200 hover:-translate-y-0.5 ${className}`}
     >
       <span className="shrink-0">{glyph}</span>
@@ -185,13 +188,13 @@ function StoreBadges({ className = "" }: { className?: string }) {
   return (
     <div className={`flex flex-wrap items-center gap-3 ${className}`}>
       <StoreBadge
-        href="https://www.imox-app.com/"
+        href="https://apps.apple.com/us/app/imox-copilot/id6777773188"
         top="Download on the"
         brand="App Store"
         glyph={<AppleGlyph className="size-6" />}
       />
       <StoreBadge
-        href="https://www.imox-app.com/"
+        href="https://play.google.com/store/apps/details?id=com.imox.copilot"
         top="Get it on"
         brand="Google Play"
         glyph={<PlayGlyph className="size-5" />}
@@ -203,41 +206,52 @@ function StoreBadges({ className = "" }: { className?: string }) {
 function PhoneChat({ compact = false, className = "" }: { compact?: boolean; className?: string }) {
   return (
     <div
-      className={`relative mx-auto rounded-[2.4rem] border-[7px] border-brand-ink bg-background p-2 shadow-2xl ${compact ? "w-[230px]" : "w-[270px]"} ${className}`}
+      className={`relative mx-auto flex shrink-0 flex-col rounded-[2.4rem] border-[7px] border-brand-ink bg-background p-2 shadow-2xl ${compact ? "h-[464px] w-[225px] max-w-[86vw]" : "w-[270px]"} ${className}`}
     >
-      <div className="mx-auto mb-3 h-5 w-24 rounded-b-xl bg-brand-ink" />
-      <div className="rounded-[1.7rem] bg-brand-soft/70 p-3">
-        <div className="mb-5 flex items-center gap-2 border-b border-primary/10 pb-3">
-          <span className="grid size-8 place-items-center rounded-full bg-primary text-primary-foreground">
-            <Users className="size-4" />
+      <div className="mx-auto mb-3 h-5 w-24 shrink-0 rounded-b-xl bg-brand-ink" />
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-[1.7rem] bg-brand-soft/70 p-3">
+        <div className="mb-3 shrink-0 border-b border-primary/10 pb-3 text-center">
+          <p className="text-[9px] font-semibold text-muted-foreground">10:42</p>
+          <p className="mt-1 text-sm font-bold">iMOX Copilot</p>
+          <span className="mt-2 inline-flex rounded-full bg-background/85 px-3 py-1 text-[9px] font-semibold text-muted-foreground shadow-sm">
+            Today
           </span>
-          <div>
-            <p className="text-xs font-bold">Wedding plans</p>
-            <p className="text-[9px] text-muted-foreground">8 members · iMOX Copilot on</p>
+        </div>
+        <div className="chat-thread min-h-0 flex-1 overflow-hidden text-[10px] leading-relaxed">
+          <div className="chat-scroll space-y-2.5 pb-2">
+            <div className="ml-6 rounded-xl rounded-tr-sm bg-background p-2.5 shadow-sm">
+              <span className="font-bold text-primary">@iMOX Copilot</span> Let Sarah finish the
+              client proposal by Friday
+              <div className="mt-1 text-right text-[8px] text-muted-foreground">10:42 ✓</div>
+            </div>
+            <div className="chat-task rounded-xl border border-primary/20 bg-background p-2.5 shadow-sm">
+              <div className="mb-1.5 flex items-center gap-1.5 font-semibold text-primary">
+                <ListChecks className="size-3" /> Task created
+              </div>
+              <div className="flex items-center justify-between gap-2 rounded-lg border border-primary/15 bg-background/80 px-2 py-2">
+                <div>
+                  <p className="font-bold leading-tight">Finish the client proposal</p>
+                  <p className="mt-1 text-[8px] text-muted-foreground">
+                    Medium · Sarah · Oct 10, 2026
+                  </p>
+                </div>
+                <span className="text-sm text-muted-foreground">›</span>
+              </div>
+            </div>
+            <div className="mr-5 flex items-start gap-2">
+              <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[linear-gradient(135deg,var(--brand-cyan),var(--primary))] text-primary-foreground shadow-sm">
+                <Sparkle className="size-3.5" />
+              </span>
+              <div className="rounded-xl rounded-tl-sm bg-background p-2.5 shadow-sm">
+                The task <strong>“Finish the client proposal”</strong> has been created and
+                assigned to <strong>Sarah</strong>, with a due date of{" "}
+                <strong>October 10, 2026</strong> (this Friday).
+                <div className="mt-1 text-right text-[8px] text-muted-foreground">10:42</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="chat-thread space-y-3 text-[10px] leading-relaxed">
-          <div className="mr-8 rounded-xl rounded-tl-sm bg-background p-2.5 shadow-sm">
-            Maya, can you confirm the florist tomorrow?
-          </div>
-          <div className="ml-9 rounded-xl rounded-tr-sm bg-primary p-2.5 text-primary-foreground">
-            Yes — I’ll call before noon.
-          </div>
-          <div className="chat-task rounded-xl border border-primary/20 bg-background p-3 shadow-sm">
-            <div className="mb-2 flex items-center gap-1.5 font-bold text-primary">
-              <WandSparkles className="size-3" /> Task created
-            </div>
-            <p className="font-semibold">Confirm the florist</p>
-            <div className="mt-2 flex items-center justify-between text-[9px] text-muted-foreground">
-              <span>Owner · Maya</span>
-              <span>Tomorrow · 12 PM</span>
-            </div>
-          </div>
-          <div className="mr-12 rounded-xl rounded-tl-sm bg-background p-2.5 shadow-sm">
-            Perfect. One less thing to chase.
-          </div>
-        </div>
-        <div className="mt-5 flex items-center justify-between rounded-full bg-background px-3 py-2 text-[9px] text-muted-foreground shadow-sm">
+        <div className="mt-4 flex shrink-0 items-center justify-between rounded-full bg-background px-3 py-2 text-[9px] text-muted-foreground shadow-sm">
           <span>Message the group…</span>
           <span className="grid size-6 place-items-center rounded-full bg-primary text-primary-foreground">
             ↑
@@ -346,9 +360,9 @@ function HeroFeatureCard({
 
 function HeroAvatarStack() {
   const avatars = [
-    { src: copilotTeam, alt: "Project team using iMOX" },
-    { src: organizedLife, alt: "Family trip group using iMOX" },
-    { src: heroPeople, alt: "Wedding plans group using iMOX" },
+    { src: heroTeam, alt: "Project team using iMOX" },
+    { src: heroHome, alt: "Someone organizing home life with iMOX" },
+    { src: heroSolo, alt: "Freelancer using iMOX on the go" },
   ];
 
   return (
@@ -362,7 +376,7 @@ function HeroAvatarStack() {
           width={44}
           height={44}
           className="size-11 rounded-full border-2 border-background object-cover shadow-sm"
-          style={{ objectPosition: index === 0 ? "18% 40%" : index === 1 ? "35% 50%" : "8% 30%" }}
+          style={{ objectPosition: index === 0 ? "22% 42%" : index === 1 ? "52% 34%" : "50% 20%" }}
         />
       ))}
     </div>
@@ -508,32 +522,32 @@ function Index() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 lg:col-span-7 lg:grid-cols-3 lg:grid-rows-[220px_180px_192px] lg:gap-4 xl:grid-rows-[232px_184px_192px]">
+          <div className="hero-mobile-composite grid grid-cols-2 gap-3 lg:col-span-7 lg:grid-cols-[1fr_1.15fr_1fr] lg:grid-rows-[220px_180px_192px] lg:gap-4 xl:grid-rows-[232px_184px_192px]">
             <HeroPhotoCard
-              src={copilotTeam}
+              src={heroTeam}
               alt="Project team coordinating with iMOX Copilot on a phone"
               title="Project team"
               meta="Copilot on"
               priority
-              className="hero-reveal order-2 aspect-[4/5] lg:order-none lg:row-span-2 lg:aspect-auto"
-              imageClassName="object-[18%_40%]"
+              className="hero-reveal hero-mobile-team order-2 aspect-[4/5] lg:order-none lg:row-span-2 lg:aspect-auto"
+              imageClassName="object-[46%_46%]"
               style={{ "--reveal-delay": "360ms" } as CSSProperties}
             />
             <HeroFeatureCard
               variant="violet"
-              className="hero-reveal order-4 lg:order-none lg:row-start-3"
+              className="hero-reveal hero-mobile-violet order-4 lg:order-none lg:row-start-3"
               style={{ "--reveal-delay": "520ms" } as CSSProperties}
             />
 
             <article
-              className="hero-reveal hero-card relative order-1 col-span-2 overflow-hidden rounded-3xl border border-primary/10 bg-brand-soft p-4 shadow-sm imox-grid lg:order-none lg:col-span-1 lg:row-span-2"
+              className="hero-reveal hero-card hero-mobile-phone relative order-1 col-span-2 overflow-hidden rounded-3xl border border-primary/10 bg-brand-soft p-2 shadow-sm imox-grid sm:p-4 lg:order-none lg:col-span-1 lg:row-span-2 lg:p-3"
               style={{ "--reveal-delay": "440ms" } as CSSProperties}
             >
               <div className="absolute inset-0 bg-background/45" />
               <div className="relative flex min-h-[300px] items-center justify-center sm:min-h-[360px] lg:min-h-full">
                 <PhoneChat
                   compact
-                  className="scale-[.74] sm:scale-[.86] lg:scale-[.78] xl:scale-[.85]"
+                  className="-translate-y-7 scale-[.72] sm:scale-[.8] lg:scale-[.76] xl:scale-[.8]"
                 />
                 <div className="float-slow absolute right-2 top-8 hidden rounded-2xl border border-border bg-background/92 p-3 text-left shadow-xl backdrop-blur md:block">
                   <p className="text-xs font-bold">Deadline tracked</p>
@@ -542,26 +556,26 @@ function Index() {
               </div>
             </article>
             <HeroPhotoCard
-              src={organizedLife}
-              alt="Family trip group organizing shared tasks in iMOX"
-              title="Family trip"
+              src={heroHome}
+              alt="Someone organizing home life with iMOX from the couch"
+              title="Home life"
               meta="4 tasks"
-              className="hero-reveal order-5 hidden aspect-[4/3] sm:block lg:order-none lg:row-start-3 lg:aspect-auto"
-              imageClassName="object-[35%_50%]"
+              className="hero-reveal hero-mobile-family order-5 hidden aspect-[4/3] sm:block lg:order-none lg:row-start-3 lg:aspect-auto"
+              imageClassName="object-[52%_38%]"
               style={{ "--reveal-delay": "600ms" } as CSSProperties}
             />
 
             <HeroPhotoCard
-              src={heroPeople}
-              alt="Wedding planning group coordinating with iMOX"
-              title="Wedding plans"
-              meta="8 members"
-              className="hero-reveal order-3 aspect-[3/4] lg:order-none lg:row-span-2 lg:aspect-auto"
-              imageClassName="object-[8%_30%]"
+              src={heroSolo}
+              alt="Freelancer turning a chat message into a task with iMOX"
+              title="Freelancer"
+              meta="3 tasks"
+              className="hero-reveal hero-mobile-wedding order-3 aspect-[3/4] lg:order-none lg:row-span-2 lg:aspect-auto"
+              imageClassName="object-[50%_22%]"
               style={{ "--reveal-delay": "680ms" } as CSSProperties}
             />
             <HeroFeatureCard
-              className="hero-reveal order-6 lg:order-none lg:row-start-3"
+              className="hero-reveal hero-mobile-followup order-6 lg:order-none lg:row-start-3"
               style={{ "--reveal-delay": "760ms" } as CSSProperties}
             />
           </div>
@@ -597,34 +611,32 @@ function Index() {
               ))}
             </ul>
           </div>
-          <figure className="reveal group relative overflow-hidden rounded-3xl border border-border bg-secondary p-2 shadow-sm sm:col-span-2 lg:col-span-7 xl:col-span-8">
-            <div className="relative overflow-hidden rounded-[1.15rem]">
-              <img
-                src={copilotBuilding}
-                alt="iMOX Copilot logo on the facade of a modern office building"
-                loading="lazy"
-                width={1672}
-                height={941}
-                className="aspect-[16/10] w-full object-cover object-[45%_40%] transition-transform duration-700 ease-out group-hover:scale-[1.03] lg:aspect-auto lg:h-[396px]"
-              />
-            </div>
+          <figure className="reveal group sm:col-span-2 lg:col-span-7 xl:col-span-8">
+            <img
+              src={copilotBuilding}
+              alt="iMOX Copilot logo on the facade of a modern office building"
+              loading="lazy"
+              width={1672}
+              height={941}
+              className="aspect-[16/10] w-full rounded-[1.15rem] object-cover object-[45%_40%] transition-transform duration-700 ease-out group-hover:scale-[1.03] lg:aspect-auto lg:h-[396px]"
+            />
           </figure>
-          <div className="grid gap-5 sm:col-span-2 sm:grid-cols-2 lg:col-span-12 lg:grid-cols-12">
+          <div className="grid grid-cols-2 gap-3 sm:col-span-2 sm:gap-5 lg:col-span-12 lg:grid-cols-12">
             {audiences.map((item, i) => {
               const span = i < 2 ? "lg:col-span-6" : "lg:col-span-4";
               return (
                 <article
                   key={item.title}
-                  className={`reveal audience-card audience-gradient-card group relative flex min-h-[216px] flex-col justify-between gap-8 overflow-hidden rounded-[1.35rem] border-2 border-transparent p-7 text-foreground sm:col-span-2 ${span}`}
+                  className={`reveal audience-card audience-gradient-card group relative flex min-h-[172px] flex-col justify-between gap-5 overflow-hidden rounded-2xl border-2 border-transparent p-4 text-foreground sm:min-h-[190px] sm:gap-6 sm:p-5 lg:min-h-[216px] lg:gap-8 lg:rounded-[1.35rem] lg:p-7 ${span}`}
                 >
-                  <span className="relative grid size-11 place-items-center rounded-xl bg-brand-soft text-primary transition-colors duration-300 group-hover:bg-primary/20 group-hover:text-primary">
-                    <item.icon className="size-5" />
+                  <span className="relative grid size-9 place-items-center rounded-xl bg-brand-soft text-primary transition-colors duration-300 group-hover:bg-primary/20 group-hover:text-primary sm:size-10 lg:size-11">
+                    <item.icon className="size-4 sm:size-5" />
                   </span>
                   <div className="relative">
-                    <h3 className="text-lg font-bold transition-colors duration-300 group-hover:text-primary-foreground">
+                    <h3 className="text-[0.78rem] font-bold leading-5 transition-colors duration-300 group-hover:text-primary-foreground sm:text-base sm:leading-6 lg:text-lg">
                       {item.title}
                     </h3>
-                    <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground transition-colors duration-300 group-hover:text-primary-foreground/70">
+                    <p className="mt-2 max-w-xl text-[0.68rem] leading-5 text-muted-foreground transition-colors duration-300 group-hover:text-primary-foreground/70 sm:mt-3 sm:text-xs sm:leading-5 lg:mt-4 lg:text-sm lg:leading-6">
                       {item.text}
                     </p>
                   </div>
@@ -665,9 +677,12 @@ function Index() {
                 "Due tomorrow",
                 "Added to progress tracking",
               ].map((x) => (
-                <div key={x} className="flex items-center gap-2 text-sm font-semibold">
-                  <span className="grid size-6 place-items-center rounded-full bg-primary text-primary-foreground">
-                    <Check className="size-3.5" />
+                <div
+                  key={x}
+                  className="flex items-start gap-2 text-[0.82rem] font-semibold leading-5 sm:text-sm"
+                >
+                  <span className="mt-0.5 grid size-5.5 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground shadow-sm shadow-primary/20 sm:size-6">
+                    <Check className="size-3 stroke-[3.2] sm:size-3.5" />
                   </span>
                   {x}
                 </div>
@@ -691,7 +706,7 @@ function Index() {
                 loading="lazy"
                 width={1600}
                 height={1307}
-                className="relative aspect-[1.22/1] w-full object-cover lg:min-h-[650px]"
+                className="relative aspect-[1.22/1] w-full object-contain lg:min-h-[650px]"
               />
               <img
                 src={s3ActionIcon}
@@ -699,7 +714,7 @@ function Index() {
                 loading="lazy"
                 width={56}
                 height={56}
-                className="float-slow absolute left-[16%] top-[9%] z-20 size-11"
+                className="float-slow absolute left-[16%] top-[9%] z-20 size-8 sm:size-11"
               />
               <img
                 src={s3TasksHeader}
@@ -715,7 +730,7 @@ function Index() {
                 loading="lazy"
                 width={123}
                 height={42}
-                className="float-slow absolute -left-3 bottom-[18%] z-20 w-24"
+                className="float-slow absolute -left-3 bottom-[18%] z-20 w-16 sm:w-24"
               />
               <img
                 src={s3TodoCard}
@@ -723,7 +738,7 @@ function Index() {
                 loading="lazy"
                 width={384}
                 height={80}
-                className="float-delay absolute bottom-[29%] left-[43%] z-20 w-56"
+                className="float-delay absolute bottom-[29%] left-[43%] z-20 w-40 sm:w-56"
               />
               <img
                 src={s3FollowUp}
@@ -754,7 +769,7 @@ function Index() {
             onFocusCapture={() => setHowPaused(true)}
             onBlurCapture={() => setHowPaused(false)}
           >
-            <figure className="relative mx-auto aspect-[1512/2017] w-full max-w-[460px] overflow-hidden rounded-[2rem]">
+            <figure className="relative order-2 mx-auto aspect-[1512/2017] w-full max-w-[300px] overflow-hidden rounded-[2rem] sm:max-w-[460px] lg:order-1">
               <img
                 key={activeHowStepData.title}
                 src={activeHowStepData.image}
@@ -766,7 +781,7 @@ function Index() {
               />
             </figure>
 
-            <div className="grid gap-4">
+            <div className="order-1 grid grid-cols-4 gap-2 md:grid-cols-2 md:gap-4 lg:order-2 lg:grid-cols-1 lg:gap-3">
               {steps.map((step, i) => {
                 const isActive = i === activeHowStep;
                 return (
@@ -775,24 +790,24 @@ function Index() {
                     type="button"
                     aria-pressed={isActive}
                     onClick={() => setActiveHowStep(i)}
-                    className={`group grid min-h-[116px] grid-cols-[3.2rem_1fr] items-start gap-4 rounded-xl border bg-background px-5 py-5 text-left transition-all duration-300 ${
+                    className={`group grid min-h-0 grid-cols-1 items-start gap-1 rounded-xl border bg-background px-2 py-3 text-left transition-all duration-300 sm:gap-2 sm:px-4 md:min-h-[116px] md:grid-cols-[3.2rem_1fr] md:gap-4 md:px-5 md:py-5 ${
                       isActive
                         ? "border-primary bg-[color-mix(in_oklab,var(--primary)_6%,var(--background))] shadow-brand"
                         : "border-border hover:border-primary/45 hover:bg-secondary/60"
                     }`}
                   >
                     <span
-                      className={`text-3xl font-bold leading-none transition-colors ${
+                      className={`block text-base font-bold leading-tight transition-colors sm:text-2xl md:text-3xl md:leading-none ${
                         isActive ? "text-primary" : "text-primary/45 group-hover:text-primary"
                       }`}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span>
-                      <span className="block text-base font-bold text-brand-ink md:text-lg">
+                      <span className="block text-[0.55rem] font-bold leading-[0.8rem] text-brand-ink sm:text-sm md:text-lg">
                         {step.title}
                       </span>
-                      <span className="mt-3 block max-w-lg text-sm leading-6 text-muted-foreground">
+                      <span className="mt-1 block max-w-lg text-[0.5rem] leading-[0.72rem] text-muted-foreground sm:text-xs md:mt-3 md:text-sm md:leading-6">
                         {step.text}
                       </span>
                     </span>
@@ -875,7 +890,7 @@ function Index() {
                 className="mt-8 aspect-[4/3] w-full rounded-2xl object-cover shadow-lg"
               />
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {[
                 {
                   icon: MessagesSquare,
@@ -910,30 +925,30 @@ function Index() {
               ].map(({ icon: Icon, title, text }) => (
                 <div
                   key={title}
-                  className="reveal audience-card audience-gradient-card group flex flex-col gap-4 overflow-hidden rounded-2xl border-2 border-transparent p-6"
+                  className="reveal audience-card audience-gradient-card group flex flex-col gap-3 overflow-hidden rounded-2xl border-2 border-transparent p-4 sm:gap-4 sm:p-5 lg:p-6"
                 >
-                  <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-soft text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
-                    <Icon className="size-5" />
+                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-soft text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground sm:size-10 lg:size-11">
+                    <Icon className="size-4 sm:size-5" />
                   </span>
                   <div>
-                    <p className="font-bold leading-6 text-brand-ink transition-colors duration-300 group-hover:text-primary-foreground">
+                    <p className="text-[0.78rem] font-bold leading-5 text-brand-ink transition-colors duration-300 group-hover:text-primary-foreground sm:text-sm sm:leading-6 lg:text-base">
                       {title}
                     </p>
-                    <p className="mt-1.5 text-sm leading-6 text-muted-foreground transition-colors duration-300 group-hover:text-primary-foreground/70">
+                    <p className="mt-1.5 text-[0.68rem] leading-5 text-muted-foreground transition-colors duration-300 group-hover:text-primary-foreground/70 sm:text-xs lg:text-sm lg:leading-6">
                       {text}
                     </p>
                   </div>
                 </div>
               ))}
-              <div className="reveal audience-card audience-gradient-card group flex items-center gap-4 overflow-hidden rounded-2xl border-2 border-transparent p-6 sm:col-span-2">
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-soft text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
-                  <Zap className="size-5" />
+              <div className="reveal audience-card audience-gradient-card group flex items-start gap-3 overflow-hidden rounded-2xl border-2 border-transparent p-4 sm:gap-4 sm:p-5 lg:p-6">
+                <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-soft text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground sm:size-10 lg:size-11">
+                  <Zap className="size-4 sm:size-5" />
                 </span>
                 <div>
-                  <p className="font-bold leading-6 text-brand-ink transition-colors duration-300 group-hover:text-primary-foreground">
+                  <p className="text-[0.78rem] font-bold leading-5 text-brand-ink transition-colors duration-300 group-hover:text-primary-foreground sm:text-sm sm:leading-6 lg:text-base">
                     No training or setup
                   </p>
-                  <p className="mt-1.5 text-sm leading-6 text-muted-foreground transition-colors duration-300 group-hover:text-primary-foreground/70">
+                  <p className="mt-1.5 text-[0.68rem] leading-5 text-muted-foreground transition-colors duration-300 group-hover:text-primary-foreground/70 sm:text-xs lg:text-sm lg:leading-6">
                     It works the moment you start chatting—nothing to configure.
                   </p>
                 </div>
@@ -990,10 +1005,10 @@ function Index() {
               </p>
               <ul className="mt-5 space-y-3.5 text-sm text-primary-foreground/70">
                 {[
-                  { label: "Features", href: "#for-whom" },
+                  // { label: "Features", href: "#for-whom" },
                   { label: "How it works", href: "#how" },
                   { label: "Why iMOX", href: "#why" },
-                  { label: "Download", href: "#download" },
+                  // { label: "Download", href: "#download" },
                 ].map((link) => (
                   <li key={link.label}>
                     <a href={link.href} className="transition-colors hover:text-primary-foreground">
@@ -1011,7 +1026,16 @@ function Index() {
               <ul className="mt-5 space-y-3.5 text-sm text-primary-foreground/70">
                 {["Terms of Use", "Privacy Policy", "Delete Account"].map((label) => (
                   <li key={label}>
-                    <a href="#" className="transition-colors hover:text-primary-foreground">
+                    <a
+                      href={
+                        label === "Terms of Use"
+                          ? "/terms-of-use"
+                          : label === "Privacy Policy"
+                            ? "/privacy-policy"
+                            : "/delete-account"
+                      }
+                      className="transition-colors hover:text-primary-foreground"
+                    >
                       {label}
                     </a>
                   </li>
