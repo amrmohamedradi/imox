@@ -283,12 +283,6 @@
     );
 }
 
-@utility float-slow {
-  animation: float-slow 5s ease-in-out infinite;
-}
-@utility float-delay {
-  animation: float-slow 5s ease-in-out 1.2s infinite;
-}
 
 @layer utilities {
   .hero-grid-mask {
@@ -388,16 +382,55 @@
     padding: 0.85rem 1rem;
     box-shadow: 0 20px 50px color-mix(in oklab, var(--brand-ink) 16%, transparent);
     backdrop-filter: blur(18px);
+    opacity: 0;
+    transform: translateX(22px) translateY(-8px) scale(0.92);
+    animation: notification-loop 2s var(--ease-out-expo) infinite;
+    animation-delay: var(--notification-delay, 0ms);
+    will-change: transform, opacity, filter;
   }
 
-  .hero-floating-card-left {
-    left: clamp(1rem, 3vw, 2rem);
-    bottom: clamp(1rem, 3vw, 2rem);
-  }
-
-  .hero-floating-card-right {
-    right: clamp(1rem, 3vw, 2rem);
+  .hero-floating-stack {
+    position: absolute;
+    z-index: 2;
     top: clamp(1rem, 3vw, 2rem);
+    right: clamp(1rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.55rem;
+    margin: 0;
+    width: min(220px, calc(100% - 1.8rem));
+  }
+
+  .hero-floating-stack .hero-floating-card {
+    position: static;
+    width: 100%;
+    gap: 0.6rem;
+    border-radius: 0.85rem;
+    padding: 0.6rem 0.72rem;
+  }
+
+  /* Shrink the icon tile inside the stacked cards. */
+  .hero-floating-stack .hero-floating-card > span:first-child {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.7rem;
+  }
+
+  .hero-floating-stack .hero-floating-card > span:first-child > svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Tighten the label typography a touch. */
+  .hero-floating-stack .hero-floating-card .text-sm {
+    font-size: 0.78rem;
+    line-height: 1rem;
+  }
+
+  .hero-floating-stack .hero-floating-card .text-xs {
+    font-size: 0.66rem;
+    line-height: 0.9rem;
   }
 
   .aha-moment-media {
@@ -643,14 +676,6 @@
     }
   }
 
-  /* Gradient hairline border in brand colors; the padding-box layer keeps the fill. */
-  .border-brand-gradient {
-    border: 1px solid transparent;
-    background:
-      linear-gradient(var(--background), var(--background)) padding-box,
-      linear-gradient(100deg, var(--primary), var(--brand-cyan), var(--brand-lime)) border-box;
-  }
-
   /* A light sweep crosses a primary button on hover. */
   .btn-sheen {
     position: relative;
@@ -695,15 +720,6 @@
   }
 }
 
-@keyframes float-slow {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
 @keyframes hero-reveal {
   from {
     opacity: 0;
@@ -839,13 +855,12 @@
   html {
     scroll-behavior: auto;
   }
-  .float-slow,
-  .float-delay,
   .hero-reveal,
   .step-media,
   .hero-collage figure,
   .audience-gallery-card,
   .aha-floating-pill,
+  .hero-floating-card,
   .cta-aurora {
     animation: none;
   }
@@ -853,7 +868,8 @@
   .step-media,
   .hero-collage figure,
   .audience-gallery-card,
-  .aha-floating-pill {
+  .aha-floating-pill,
+  .hero-floating-card {
     opacity: 1;
     transform: none;
     filter: none;

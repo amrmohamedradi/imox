@@ -7,18 +7,38 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+
+# Build output
 dist
 dist-ssr
+build
+out
 .output
 .vinxi
 .tanstack/**
 .nitro
+
+# Env files (keep .env.example tracked)
+.env
+.env.*
+!.env.example
+.dev.vars
+
+# Cache / tooling
+.vite/
+.cache/
+.eslintcache
+*.tsbuildinfo
+coverage/
 *.local
 
 # Wrangler / Cloudflare
 .wrangler/
-.dev.vars
+
+# Local Claude Code settings (personal, not shared)
+.claude/settings.local.json
 
 # Impeccable platform engine binaries (large, platform-specific; re-downloaded on demand)
 .claude/skills/impeccable/scripts/bin/
@@ -28,6 +48,7 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
