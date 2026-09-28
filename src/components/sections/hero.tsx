@@ -32,7 +32,12 @@ export function Hero({ onWatchDemo }: { onWatchDemo: () => void }) {
               className="hero-reveal flex flex-col gap-3 sm:flex-row"
               style={{ "--reveal-delay": "240ms" } as CSSProperties}
             >
-              <Button asChild variant="brand" size="xl" className="group btn-sheen active:scale-[.98]">
+              <Button
+                asChild
+                variant="brand"
+                size="xl"
+                className="group btn-sheen active:scale-[.98]"
+              >
                 <a href="#download">
                   Start free{" "}
                   <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />

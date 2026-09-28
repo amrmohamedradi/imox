@@ -9,7 +9,9 @@ export function WhyImox() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="grid gap-14 lg:grid-cols-[.8fr_1.2fr]">
           <div className="reveal">
-            <p className="mb-4 text-xs font-bold uppercase text-brand-deep">Why iMOX is different</p>
+            <p className="mb-4 text-xs font-bold uppercase text-brand-deep">
+              Why iMOX is different
+            </p>
             <h2 className="text-3xl font-bold md:text-6xl">
               Most tools help manage work.{" "}
               <span className="text-brand-gradient">iMOX makes work move.</span>

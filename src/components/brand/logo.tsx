@@ -1,4 +1,10 @@
-export function Logo({ light = false, className = "h-9" }: { light?: boolean; className?: string }) {
+export function Logo({
+  light = false,
+  className = "h-9",
+}: {
+  light?: boolean;
+  className?: string;
+}) {
   return (
     <a href="#top" className="inline-flex items-center" aria-label="iMOX home">
       <img

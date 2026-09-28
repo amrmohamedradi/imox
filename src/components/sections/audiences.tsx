@@ -160,9 +160,7 @@ export function Audiences() {
                 aria-pressed={i === activeAudience}
                 onClick={() => showAudience(i)}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  i === activeAudience
-                    ? "w-8 bg-primary"
-                    : "w-2 bg-primary/20 hover:bg-primary/45"
+                  i === activeAudience ? "w-8 bg-primary" : "w-2 bg-primary/20 hover:bg-primary/45"
                 }`}
               />
             ))}
