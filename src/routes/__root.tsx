@@ -72,22 +72,48 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+// Canonical production origin — used to build absolute URLs for Open Graph / Twitter,
+// which require fully-qualified URLs (relative paths are ignored by most scrapers).
+const SITE_URL = "https://imox-app.com";
+const SITE_TITLE = "iMOX — Turn conversations into organized action";
+const SITE_DESCRIPTION =
+  "iMOX is the AI copilot that captures tasks, owners, and deadlines as you talk. Turn everyday conversations into organized action. Free on iOS & Android.";
+const OG_IMAGE = `${SITE_URL}/og-image.png`;
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "iMOX" },
-      { name: "description", content: "iMOX turns everyday conversations into organized action." },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
       { name: "author", content: "iMOX" },
+      { name: "theme-color", content: "#100c17" },
+      // Open Graph
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "iMOX" },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: OG_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:type", content: "image/png" },
+      { property: "og:image:alt", content: "iMOX — turn conversations into organized action" },
+      { property: "og:locale", content: "en_US" },
+      // Twitter
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: OG_IMAGE },
+      { name: "twitter:image:alt", content: "iMOX — turn conversations into organized action" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "canonical", href: SITE_URL },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

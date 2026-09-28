@@ -283,7 +283,6 @@
     );
 }
 
-
 @layer utilities {
   .hero-grid-mask {
     -webkit-mask-image: radial-gradient(circle at 72% 42%, black, transparent 70%);
