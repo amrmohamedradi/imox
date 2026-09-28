@@ -1,8 +1,8 @@
 import type { Audience } from "@/types/landing";
-import audienceSmb from "@/assets/imox-audience-smb.png";
-import audienceAgencies from "@/assets/imox-audience-agencies.png";
-import audienceStartup from "@/assets/imox-audience-startup.png";
-import audiencePrivate from "@/assets/imox-audience-private.png";
+import audienceSmb from "@/assets/imox-audience-smb.webp";
+import audienceAgencies from "@/assets/imox-audience-agencies.webp";
+import audienceStartup from "@/assets/imox-audience-startup.webp";
+import audiencePrivate from "@/assets/imox-audience-private.webp";
 
 export const audiences: Audience[] = [
   {
