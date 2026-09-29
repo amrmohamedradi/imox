@@ -7,7 +7,7 @@ export function DownloadCta() {
     <section id="download" className="px-5 pb-10 pt-4">
       <div className="cta-aurora relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] px-6 py-16 text-center text-primary-foreground md:px-16 md:py-24">
         <AppIcon className="mx-auto size-16" />
-        <h2 className="mx-auto mt-8 max-w-4xl text-3xl font-bold md:text-6xl">
+        <h2 className="mx-auto mt-8 max-w-4xl text-[clamp(1.7rem,5.5vw,3.75rem)] font-bold leading-[1.1]">
           Get your whole team on iMOX.
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-base leading-7 text-primary-foreground/80">

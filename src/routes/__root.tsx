@@ -78,7 +78,7 @@ const SITE_URL = "https://imox-app.com";
 const SITE_TITLE = "iMOX — Turn conversations into organized action";
 const SITE_DESCRIPTION =
   "iMOX is the AI copilot that captures tasks, owners, and deadlines as you talk. Turn everyday conversations into organized action. Free on iOS & Android.";
-const OG_IMAGE = `${SITE_URL}/og-image.png`;
+const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -98,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: OG_IMAGE },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:type", content: "image/png" },
+      { property: "og:image:type", content: "image/jpeg" },
       { property: "og:image:alt", content: "iMOX — turn conversations into organized action" },
       { property: "og:locale", content: "en_US" },
       // Twitter
@@ -121,6 +121,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap",
       },
       { rel: "icon", href: "/icon-mark.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
+      { rel: "manifest", href: "/site.webmanifest" },
     ],
   }),
   shellComponent: RootShell,

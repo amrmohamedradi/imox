@@ -11,7 +11,7 @@ export function SiteHeader() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:px-8">
         <Logo />
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-8 lg:flex">
           {primaryNav.map((item) => (
             <a
               key={item.href}
@@ -22,7 +22,7 @@ export function SiteHeader() {
             </a>
           ))}
         </nav>
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <a href="#download" className="text-sm font-medium text-brand-ink">
             Open iMOX Web
           </a>
@@ -39,14 +39,14 @@ export function SiteHeader() {
           aria-controls="mobile-nav"
           variant="ghost"
           size="icon"
-          className="md:hidden"
+          className="lg:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X /> : <Menu />}
         </Button>
       </div>
       {menuOpen && (
-        <nav id="mobile-nav" className="border-t border-border bg-background px-5 py-5 md:hidden">
+        <nav id="mobile-nav" className="border-t border-border bg-background px-5 py-5 lg:hidden">
           {primaryNav.map((item) => (
             <a
               key={item.href}

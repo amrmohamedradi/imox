@@ -15,7 +15,7 @@ export function AhaMoment() {
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[.82fr_1.18fr] lg:px-8">
         <div className="reveal">
           <p className="mb-4 text-xs font-bold uppercase text-brand-deep">The aha moment</p>
-          <h2 className="text-3xl font-bold md:text-6xl">
+          <h2 className="text-[clamp(1.7rem,5.5vw,3.75rem)] font-bold leading-[1.1]">
             Just say it.
             <br />
             <span className="text-brand-gradient">iMOX handles the execution.</span>

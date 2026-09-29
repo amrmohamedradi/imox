@@ -12,7 +12,7 @@ export function WhyImox() {
             <p className="mb-4 text-xs font-bold uppercase text-brand-deep">
               Why iMOX is different
             </p>
-            <h2 className="text-3xl font-bold md:text-6xl">
+            <h2 className="text-[clamp(1.7rem,5.5vw,3.75rem)] font-bold leading-[1.1]">
               Most tools help manage work.{" "}
               <span className="text-brand-gradient">iMOX makes work move.</span>
             </h2>

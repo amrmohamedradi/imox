@@ -31,7 +31,9 @@ export function NotPmTool({ onWatchDemo }: { onWatchDemo: () => void }) {
           <p className="mb-4 text-xs font-bold uppercase text-brand-lime">
             Built for how people actually work
           </p>
-          <h2 className="text-3xl font-bold md:text-6xl">Not another project management tool.</h2>
+          <h2 className="text-[clamp(1.7rem,5.5vw,3.75rem)] font-bold leading-[1.1]">
+            Not another project management tool.
+          </h2>
           <p className="mt-5 text-base leading-7 text-primary-foreground/70 sm:mt-6 sm:text-lg sm:leading-8">
             Most platforms ask teams to stop working and start managing software. iMOX does the
             opposite. It fits directly into the way people already communicate.

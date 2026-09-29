@@ -33,7 +33,7 @@ export function Audiences() {
           <p className="mb-4 text-xs font-bold uppercase text-brand-deep">
             Built for real life and real work
           </p>
-          <h2 className="max-w-md text-3xl font-bold leading-[1.04] md:text-6xl">
+          <h2 className="max-w-md text-[clamp(1.7rem,5.5vw,3.75rem)] font-bold leading-[1.04]">
             Who is
             <span className="block text-brand-gradient">iMOX for?</span>
           </h2>
