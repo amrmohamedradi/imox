@@ -37,8 +37,8 @@ coverage/
 # Wrangler / Cloudflare
 .wrangler/
 
-# Local Claude Code settings (personal, not shared)
-.claude/settings.local.json
+# Claude Code tooling (personal, not part of the project)
+.claude/
 
 # Impeccable platform engine binaries (large, platform-specific; re-downloaded on demand)
 .claude/skills/impeccable/scripts/bin/
