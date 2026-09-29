@@ -11,7 +11,7 @@ const benefits = [
 
 export function NotPmTool({ onWatchDemo }: { onWatchDemo: () => void }) {
   return (
-    <section className="bg-brand-ink py-12 text-primary-foreground md:py-32">
+    <section className="bg-brand-ink py-10 text-primary-foreground md:py-20">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2 lg:px-8">
         <figure className="reveal relative min-h-[340px] overflow-hidden rounded-2xl border border-primary-foreground/10 sm:min-h-[440px] lg:min-h-[520px]">
           <img

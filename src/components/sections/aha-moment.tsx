@@ -11,7 +11,7 @@ const ahaActions = [
 
 export function AhaMoment() {
   return (
-    <section className="overflow-hidden bg-secondary py-12 md:py-32">
+    <section className="overflow-hidden bg-secondary py-10 md:py-20">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[.82fr_1.18fr] lg:px-8">
         <div className="reveal">
           <p className="mb-4 text-xs font-bold uppercase text-brand-deep">The aha moment</p>

@@ -296,7 +296,7 @@
 
   /* Entrance for the How-it-works media each time the active step swaps it. */
   .step-media {
-    animation: step-media 520ms var(--ease-out-expo) both;
+    animation: step-media 400ms var(--ease-out-quint) both;
   }
 
   /* Animated underline for primary navigation links. */
@@ -744,13 +744,11 @@
 @keyframes step-media {
   from {
     opacity: 0;
-    transform: scale(1.03);
-    filter: blur(12px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
+    transform: translateY(0);
   }
 }
 @keyframes hero-photo-rise {

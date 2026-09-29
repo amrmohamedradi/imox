@@ -27,7 +27,7 @@ export function Audiences() {
   } = useAudienceCarousel();
 
   return (
-    <section id="for-whom" className="overflow-hidden py-10 md:py-28">
+    <section id="for-whom" className="overflow-hidden py-10 md:py-20">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-[0.84fr_1.16fr] lg:gap-12 lg:px-8">
         <div className="reveal">
           <p className="mb-4 text-xs font-bold uppercase text-brand-deep">

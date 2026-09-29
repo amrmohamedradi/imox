@@ -5,7 +5,7 @@ export function WhyImox() {
   const { icon: HighlightIcon, title: highlightTitle, text: highlightText } = highlightFeature;
 
   return (
-    <section id="why" className="py-12 md:py-32">
+    <section id="why" className="py-10 md:py-20">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="grid gap-14 lg:grid-cols-[.8fr_1.2fr]">
           <div className="reveal">
